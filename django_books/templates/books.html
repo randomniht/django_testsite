@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<h1>Книги из шаблона</h1>
+
+<h3>Фильтр по категориям</h3>
+<a href="/books">Все категории</a>
+<a href="/">page</a>
+
+{% for category in category_list %}
+    <a href="/books?category={{category.id}}">{{ category.name }}</a>
+{% endfor %}
+
+{% for book in books_list %}
+    <div style="border: 2px solid blue; width: 30%; margin-bottom:30px; padding: 5px">
+        з
+        <p>Название: <a href="books/{{book.id}}">{{book.name}}</a></p>
+        <p>Автор: {{book.author}} Категория: {{ book.category.name }}</p>
+        <p>Цена: {{ book.price }}</p>
+    </div>
+{% endfor  %}
+
+</body>
+</html>
