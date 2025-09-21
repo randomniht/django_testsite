@@ -1,0 +1,19 @@
+{% extends 'inheritance.html'%}
+{% block title %}posts{%endblock%}
+{% block div %}
+<div>
+    ##FORM TO POST
+<form method="post">
+    {% csrf_token %}
+    {{form}}
+    <br>
+    <button class="btn btn-success rounded-pill px-3" type="submit">Add</button>
+
+
+</form>
+</div>
+<br>
+<a href="\" class="btn btn-info rounded-pill px-3">Main page</a>
+
+
+{%endblock%}

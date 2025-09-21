@@ -1,0 +1,22 @@
+{% extends 'inheritance.html'%}
+{% block title %}Site{%endblock%}
+{% block div %}
+<div class="mx-auto">
+    all </div>
+
+{% for el in elements %}
+    <div class="row">
+    <div class="card col-md-4">
+    <h1>{{el.title}}</h1>
+    <p>{{el.text}}</p>
+    <p>{{el.date}}</p>
+
+
+    </div>
+
+
+
+    {% endfor %}
+<a href="\post" class="btn btn-info rounded-pill px-3">Posting</a>
+</div>
+{%endblock%}
