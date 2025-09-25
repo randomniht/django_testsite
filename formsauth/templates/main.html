@@ -1,0 +1,40 @@
+{% extends 'model.html' %}
+
+{%block div%}
+
+<div class="container">
+<div class="row md-5 col-md-4 d-grid gap-2">
+    {% if request.user.is_authenticated %}
+    <li class="nav-item">hi {{request.user.username}}</li>
+    <a class="btn btn-info rounded-pill px-3" href="users/logout">Logout</a>
+
+    {%else%}
+ 
+    <a class="btn btn-info rounded-pill px-3" href="users/login">Login</a>
+    {%endif%}
+
+    <a class="btn btn-success rounded-pill px-3" href="promts/add">Add</a>
+
+
+
+<div class="">List promt</div>
+    {%for promt in promts%}
+
+    
+    <div class="">
+        <h3>{{promt.name}}</h3>
+        <p>{{promt.text}}</p>
+        <a class="btn btn-success" href="{% url 'promt_detail' promt.id %}">Check</a>
+    </div>
+    {%endfor%}
+ {%endblock%}
+    <!-- <div class="">List promt</div> -->
+</div>
+    
+</div>
+
+
+
+
+</body>
+</html>

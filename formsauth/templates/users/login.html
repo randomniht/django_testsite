@@ -1,0 +1,22 @@
+{% extends 'model.html' %}
+{%load crispy_forms_tags%}
+{%block div%}
+
+<div class="container">
+<div class="row md-5 col-md-4">
+<a class="btn btn-info rounded-pill px-3" href="/">Mainpage</a>
+
+<form method="post">
+
+    {% csrf_token %}
+    {{ form|crispy}}
+    <button type="submit" class="btn btn-success rounded-pill px-3">Add</button>
+</form>
+
+
+
+</div>
+</div>
+ {%endblock%}
+</body>
+</html>
