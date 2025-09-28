@@ -1,21 +1,24 @@
 {% extends 'inheritance.html'%}
-{% block title %}posts{%endblock%}
+{% block title %}Reg{%endblock%}
 {% block div %}
-<div>
-    ##FORM TO POST
+##FORM_REG
 
-    <form method="post">
+
+        <form method="post">
         {% csrf_token %}
-        {{form.as_p}}
-        <br>    
+        {{ form.as_p }}
         <button type="submit" class="btn btn-success rounded-pill px-3">Submit</button>
     </form>
-
+if you don't have an account
+<a href="\reg" class="btn btn-info rounded-pill px-5">reg</a>  
 
 
 </div>
 <br>    
 <a href="\" class="btn btn-info rounded-pill px-3">Main page</a>
+
+
+
 
 
 {%endblock%}

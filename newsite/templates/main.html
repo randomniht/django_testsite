@@ -1,6 +1,17 @@
 {% extends 'inheritance.html'%}
 {% block title %}Site{%endblock%}
 {% block div %}
+{% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+##test:12test345
+<a href="\log" class="btn btn-info rounded-pill px-5">auth</a>
+<a href="\reg" class="btn btn-info rounded-pill px-5">reg</a>
+<a href="\logout" class="btn btn-info rounded-pill px-5">logout</a>
+
+
 <div class="mx-auto">
     all </div>
 
@@ -16,7 +27,10 @@
 
 
 
+
     {% endfor %}
-<a href="\post" class="btn btn-info rounded-pill px-3">Posting</a>
+
+    <a href="\post" class="btn btn-info rounded-pill px-3">Posting</a>
+
 </div>
 {%endblock%}
