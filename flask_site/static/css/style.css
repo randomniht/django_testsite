@@ -1,0 +1,23 @@
+.my-btn {
+  text-decoration: none;
+  color: #1f2937; /* темно-серый текст по умолчанию */
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #a4a6a8; /* светлая серая рамка */
+  border-radius: 0.75rem; /* мягкое скругление по инструкции */
+  background-color: #58ed33cb; /* светлый фон */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: 600;
+  font-family: 'Inter', system-ui, sans-serif;
+  user-select: none;
+  cursor: pointer;
+}
+.my-btn:hover {
+  background: linear-gradient(90deg, #bae6fd, #7dd3fc); /* плавное голубое свечение */
+  color: #0c4a6e; /* чуть темнее для контраста */
+  border-color: #7dd3fc;
+}
+.my-btn:active {
+  box-shadow: 0 4px 12px rgb(5 150 105 / 0.6);
+  transition-duration: 0.1s;
+}
