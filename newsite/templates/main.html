@@ -11,26 +11,35 @@
 <a href="\reg" class="btn btn-info rounded-pill px-5">reg</a>
 <a href="\logout" class="btn btn-info rounded-pill px-5">logout</a>
 
-
-<div class="mx-auto">
-    all </div>
-
+<!-- px-5 col-md-10 -->
 {% for el in elements %}
-    <div class="row">
-    <div class="card col-md-4">
+    <div class="row" >
+    
+  
+    <div class="col-6">
+          <!-- <div class="card list-group"></div> -->
     <h1>{{el.title}}</h1>
     <p>{{el.text}}</p>
     <p>{{el.date}}</p>
-
-
+    <p>{{el.author}}</p>
+    <a href="{% url 'post_detail' pk=el.pk %}" class=" btn btn-primary ">Check</a>  
     </div>
 
+    <div class="col-6">{% if el.image %}
+    <img src="{{ el.image.url }}" alt="{{ el.title }}" class="list-group" style="width: 20%;">
+    {% else %}
+    <p>!No img</p>
+    {% endif %}
+    </div>
+    
 
-
-
+</div>  
+    </div>
+    
     {% endfor %}
 
     <a href="\post" class="btn btn-info rounded-pill px-3">Posting</a>
 
 </div>
+
 {%endblock%}
