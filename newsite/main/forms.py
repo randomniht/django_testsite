@@ -17,4 +17,9 @@ class RegForm(UserCreationForm):
 class ArticlePost(forms.ModelForm):
     class Meta:
         model = models.Articles
-        fields = ['title', 'text']
+        fields = ['title', 'text','image']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = models.Comment
+        fields = ['text']

@@ -6,6 +6,8 @@ urlpatterns = [
     path('post/', posting),
     path('reg/',registr),
     path('log/', user_login),
-    path('logout/', user_logout)
+    path('logout/', user_logout),
+    path('article/<int:pk>/', post_detail, name='post_detail'),
+    path('article/<int:pk>/delete/', delete_article, name='delete-article')
     
 ]

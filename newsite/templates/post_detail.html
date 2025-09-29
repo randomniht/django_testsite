@@ -1,0 +1,43 @@
+{% extends 'inheritance.html'%}
+{% block title %}Detail{%endblock%}
+{% block div %}
+<div class="container-fluid">
+<h1>{{ post.title }}</h1>
+
+{% if post.image %}
+    <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width: 30%;">
+{% else %}
+    <p>!No img</p>
+{% endif %}
+
+<p>{{ post.text }}</p>
+<p><small>Date: {{ post.date }}</small></p>
+
+
+{%for el in comments%}
+<div class="row card px-3">
+<p>Author = {{el.author}}</p>
+<p>Text = {{el.text}}</p>
+<p>Date = {{el.created_at}}</p>
+</div>
+{%endfor%}
+
+
+
+<form method="post">
+ {% csrf_token %}
+{{form}} 
+<button action="submit" class="btn btn-success rounded-pill px-3">submit</button>  
+</form>
+<br>
+
+
+<!-- Кнопка удаления -->
+<form action="{% url 'delete-article' pk=post.pk %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger rounded-pill px-3" onclick="return confirm('Delete?')">Delete</button>
+</form>
+</div>
+
+
+{%endblock%}

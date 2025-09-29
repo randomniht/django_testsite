@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
-from .models import Articles
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Articles, Comment
 from . import forms
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 # Create your views here.
 
 
@@ -68,9 +68,48 @@ def user_login(request):
 from django.contrib.auth import logout
 
 def user_logout(request):
-    logout(request)  # только выполняет выход
+    logout(request)  #выполняет выход
     messages.success(request, 'Вы вышли из системы')
-    return redirect('/')  # обязательно возвращаем redirect
+    return redirect('/')
+
+@login_required
+def post_detail(request, pk):
+    post = get_object_or_404(Articles, pk=pk)
+    comments = Comment.objects.filter(post=post).order_by('-created_at')
+    
+    if request.method == 'POST':
+        # Отправка нового комментария
+        form = forms.CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = forms.CommentForm()
+    
+    context = {
+        'post': post,
+        'comments': comments,
+        'form': form,
+    }
+    return render(request, 'post_detail.html', context)
+
+
+
+
+
+@login_required
+def delete_article(request, pk):
+    article = get_object_or_404(Articles, pk=pk)
+    if article.author != request.user:
+        html_content = """
+            <h1>403 Forbidden</h1>
+            <p>U cant del foreign post</p>
+            <a href="/" class="btn btn-info rounded-pill px-3">Main page</a>
+        """
+        return HttpResponse(html_content, content_type='text/html', status=403)
 
 
 
