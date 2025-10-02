@@ -23,7 +23,7 @@
 {%endfor%}
 
 
-
+<br>
 <form method="post">
  {% csrf_token %}
 {{form}} 
@@ -31,8 +31,7 @@
 </form>
 <br>
 
-
-<!-- Кнопка удаления -->
+<!-- btn del -->
 <form action="{% url 'delete-article' pk=post.pk %}" method="post" style="display:inline;">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger rounded-pill px-3" onclick="return confirm('Delete?')">Delete</button>

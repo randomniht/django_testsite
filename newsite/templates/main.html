@@ -13,7 +13,7 @@
 
 <!-- px-5 col-md-10 -->
 {% for el in elements %}
-    <div class="row" >
+    <div class="row border rounded-1 border-primary" >
     
   
     <div class="col-6">
@@ -26,20 +26,20 @@
     </div>
 
     <div class="col-6">{% if el.image %}
-    <img src="{{ el.image.url }}" alt="{{ el.title }}" class="list-group" style="width: 20%;">
+    <img src="{{ el.image.url }}" alt="{{ el.title }}" class="list-group" style="width: 50%;">
     {% else %}
     <p>!No img</p>
     {% endif %}
     </div>
     
 
-</div>  
-    </div>
+    </div>  
+     <br>
     
     {% endfor %}
-
+    <br>
     <a href="\post" class="btn btn-info rounded-pill px-3">Posting</a>
 
-</div>
+
 
 {%endblock%}
