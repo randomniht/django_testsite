@@ -1,0 +1,18 @@
+{% extends 'inheritance.html'%}
+{% block title %}Test{%endblock%}
+{% block div %}
+
+<div class="btn">Draw</div>
+<script type="text/javascript">
+	$('body').css({'width':WWWW-32});
+	var HHHH=window.innerHeight?window.innerHeight:((document.all)?document.body.offsetHeight:null); // высота окна браузера
+	WWWW=WWWW-32; if (WWWW<750) {WWWW=750;} if (HHHH<580) {HHHH=580;} // мин возможно
+	document.write('<iframe src="http://ina.newart.ru/med/OUT/Silk/Silk.htm" frameborder="0" scrolling="no" width="'+WWWW+'" height="'+HHHH+'" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>');
+	if (document.referrer!="http://www.newart.ru/gal18.htm") goScreen(4);
+	function goScreen(d) {$('body').delay(d*1000).animate({scrollTop:183},1200,'linear');} // автоскроллл
+</script>
+<iframe src="http://ina.newart.ru/med/OUT/Silk/Silk.htm" frameborder="0" scrolling="no" width="1888" height="953" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+
+
+
+{%endblock%}

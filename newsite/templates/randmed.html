@@ -1,0 +1,14 @@
+{% extends 'inheritance.html'%}
+{% block title %}Cat{%endblock%}
+{% block div %}
+
+<div>
+    photos
+{% for el in elements %}
+
+<img src="{{ el.image.url }}" class="list-group" style="width: 70%;">
+    
+{% endfor %}
+</div>
+
+{%endblock%}

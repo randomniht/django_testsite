@@ -23,3 +23,9 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = models.Comment
         fields = ['text']
+
+    
+class PostMedia(forms.ModelForm):
+    class Meta:
+        model = models.Mediapost
+        fields = ['image']
