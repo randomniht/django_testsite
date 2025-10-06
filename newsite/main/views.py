@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Articles, Comment
+from .models import Articles, Comment, Mediapost
 from . import forms
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -47,6 +47,7 @@ def registr(request):
 
 
 def user_login(request):
+    messages.success(request, 'if u Redirected to login page, authenticate')
     if request.method == 'POST':
         form = forms.LoginForm(request, data=request.POST)
         if form.is_valid():
@@ -72,8 +73,9 @@ def user_logout(request):
     messages.success(request, 'Вы вышли из системы')
     return redirect('/')
 
-@login_required
+@login_required(login_url='/log/')
 def post_detail(request, pk):
+    
     post = get_object_or_404(Articles, pk=pk)
     comments = Comment.objects.filter(post=post).order_by('-created_at')
     
@@ -100,7 +102,7 @@ def post_detail(request, pk):
 
 
 
-@login_required
+# @login_required(login_url='/log/')
 def delete_article(request, pk):
     article = get_object_or_404(Articles, pk=pk)
     if article.author != request.user:
@@ -110,9 +112,21 @@ def delete_article(request, pk):
             <a href="/" class="btn btn-info rounded-pill px-3">Main page</a>
         """
         return HttpResponse(html_content, content_type='text/html', status=403)
+    article.delete()
+    return redirect('/')
 
 
+def draw_page(request):
+    test = 1
+    context = {'test': test}
+    return render(request, 'draw_page.html', context=context)
 
+@login_required(login_url='/log/')
+def randmed(request):
+    elements = Mediapost.objects.filter(image__isnull=False).exclude(image__exact='')
+    context ={'elements':elements}
+    return render(request, 'randmed.html', context=context)
+    
 
 # def registr(request):
 #     if request.method == 'POST':
