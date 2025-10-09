@@ -56,7 +56,7 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, f'Добро пожаловать, {username}!')
+                messages.success(request, f'Welcom, {username}!')
                 return redirect('/')
             else:
                 messages.error(request, 'Неверные данные')
@@ -70,7 +70,7 @@ from django.contrib.auth import logout
 
 def user_logout(request):
     logout(request)  #выполняет выход
-    messages.success(request, 'Вы вышли из системы')
+    messages.success(request, 'U logout')
     return redirect('/')
 
 @login_required(login_url='/log/')
@@ -121,10 +121,23 @@ def draw_page(request):
     context = {'test': test}
     return render(request, 'draw_page.html', context=context)
 
+
 @login_required(login_url='/log/')
 def randmed(request):
     elements = Mediapost.objects.filter(image__isnull=False).exclude(image__exact='')
-    context ={'elements':elements}
+    # инициализация формы
+
+    if request.method == 'POST':
+        form = forms.PostMedia(request.POST, request.FILES)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.author = request.user
+            new_post.save()
+            return redirect('/randphoto')
+    else:
+        form = forms.PostMedia()
+
+    context = {'elements': elements, 'form': form}
     return render(request, 'randmed.html', context=context)
     
 

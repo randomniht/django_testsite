@@ -1,16 +1,30 @@
 {% extends 'inheritance.html'%}
 {% block title %}Cat{%endblock%}
 {% block div %}
-
 <div>
-    photos
-{% for el in elements %}
+    photos<br>
+    add image
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" class="btn btn-success rounded-pill px-3">Submit</button>
 
-<img src="{{ el.image.url }}" class="list-group" style="width: 70%;">
-    <div>{{el.author}}</div>
-    <div>commit</div>
+</form>
 
-{% endfor %}
+
+    <button id="randomButton" class="btn btn-success rounded-pill px-3">Rand img</button>
+    
+    <div id="elements-count" data-count="{{ elements|length }}" style="display:none;"></div>
+
+    {% for el in elements %}
+    <img src="{{ el.image.url }}" class="list-group" style="display:none;" id="image-{{ forloop.counter }}">
+    {% endfor %}
+
+
 </div>
+{% load static %}
+
+<script src="{% static 'js/randomSkript.js' %}"></script>
 
 {%endblock%}
+
