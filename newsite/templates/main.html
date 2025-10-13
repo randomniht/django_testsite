@@ -28,8 +28,12 @@
     <p>{{el.text}}</p>
     <p>{{el.date}}</p>
     <p>{{el.author}}</p>
-    <a href="{% url 'post_detail' pk=el.pk %}" class=" btn btn-primary ">Check</a>  
-    </div>
+<button class="like-btn btn btn-success rounded-pill px-3" data-article-id="{{ el.pk }}">Лайк </button>
+<div>Лайков: <span id="like-count-{{ el.pk }}">{{ el.likes }}</span></div>
+<br>
+<a href="{% url 'post_detail' pk=el.pk %}" class=" btn btn-primary ">Check</a>
+
+</div>
 
     <div class="col-6">{% if el.image %}
     <img src="{{ el.image.url }}" alt="{{ el.title }}" class="list-group" style="width: 30%;">
@@ -45,7 +49,9 @@
     {% endfor %}
     <br>
     <a href="\post" class="btn btn-info rounded-pill px-3">Posting</a>
+{% load static %}
 
+<script src="{% static 'js/postlike.js' %}"></script>
 
 
 {%endblock%}

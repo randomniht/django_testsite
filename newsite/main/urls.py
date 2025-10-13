@@ -10,6 +10,6 @@ urlpatterns = [
     path('article/<int:pk>/', post_detail, name='post_detail'),
     path('article/<int:pk>/delete/', delete_article, name='delete-article'),
     path('draw/', draw_page),
-    path('randphoto/',randmed)
-    
+    path('randphoto/',randmed),
+    path('articles/<int:pk>/like/', like_article, name='like_post'),
 ]

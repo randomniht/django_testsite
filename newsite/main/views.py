@@ -4,11 +4,19 @@ from . import forms
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.http import require_POST
+
 # Create your views here.
 
 
-
+@require_POST
+@login_required(login_url='/log/')
+def like_article(request, pk):
+    article = get_object_or_404(Articles, pk=pk)
+    article.likes += 1
+    article.save()
+    return JsonResponse({'likes': article.likes})
 
 
 def main(request):
