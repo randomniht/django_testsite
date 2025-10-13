@@ -7,11 +7,21 @@ class Articles(models.Model):
     date = models.DateTimeField('Date', auto_now_add=True)
     image = models.ImageField('Image', upload_to='articles_images/', null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    likes = models.PositiveIntegerField('Likes', default=0)
+    liked_by = models.ManyToManyField(User, related_name='liked_articles', blank=True)
 
     def __str__(self):
         return self.title
-    
+
+    # Свойство для получения количества лайков
+    @property
+    def likes_count(self):
+        return self.liked_by.count()
+
+    # Метод для проверки, лайкал ли пользователь
+    def user_has_liked(self, user):
+        if not user.is_authenticated:
+            return False
+        return self.liked_by.filter(id=user.id).exists() 
 class Comment(models.Model):
     post = models.ForeignKey(Articles, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(res => {
                 if (!res.ok) {
                     if (res.status === 403) {
-                        alert('Пожалуйста, войдите в систему, чтобы поставить лайк.');
+                        console.log(e => console.error(e));
                     }
-                    throw new Error(`Ошибка запроса: ${res.status}`);
+                    throw new Error(`Error: ${res.status}`);
                 }
                 return res.json()
             })
@@ -23,9 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const likeCountSpan = document.getElementById(`like-count-${articleId}`);
                 if (likeCountSpan) {
                     likeCountSpan.innerText = data.likes;
-                }
-                if ('liked' in data && !data.liked) {
-                    alert('Вы уже лайкали эту статью');
                 }
             })
             .catch(e => console.error(e));

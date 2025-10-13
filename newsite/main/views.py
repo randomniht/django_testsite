@@ -14,15 +14,38 @@ from django.views.decorators.http import require_POST
 @login_required(login_url='/log/')
 def like_article(request, pk):
     article = get_object_or_404(Articles, pk=pk)
-    article.likes += 1
-    article.save()
-    return JsonResponse({'likes': article.likes})
+    
+    if article.liked_by.filter(id=request.user.id).exists():
+        # Убираем лайк
+        article.liked_by.remove(request.user)
+        is_liked = False
+    else:
+        # Добавляем лайк
+        article.liked_by.add(request.user)
+        is_liked = True
+    
+    return JsonResponse({
+        'likes': article.likes_count,
+        'is_liked': is_liked
+    })
 
 
 def main(request):
     elements = Articles.objects.all()
-    context ={'elements':elements}
-    return render(request,'main.html', context)
+    
+    # Подготавливаем данные о лайках
+    articles_data = []
+    for article in elements:
+        articles_data.append({
+            'article': article,
+            'user_has_liked': article.user_has_liked(request.user)
+        })
+    
+    context = {
+        'articles_data': articles_data,
+        'current_user': request.user
+    }
+    return render(request, 'main.html', context)
 
 
 @login_required(login_url='/log/')
