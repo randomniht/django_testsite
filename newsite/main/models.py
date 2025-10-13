@@ -1,5 +1,4 @@
 from django.db import models
-
 from django.contrib.auth.models import User
 
 class Articles(models.Model):
@@ -8,7 +7,8 @@ class Articles(models.Model):
     date = models.DateTimeField('Date', auto_now_add=True)
     image = models.ImageField('Image', upload_to='articles_images/', null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    
+    likes = models.PositiveIntegerField('Likes', default=0)
+
     def __str__(self):
         return self.title
     
