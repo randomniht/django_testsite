@@ -55,7 +55,6 @@ def registr(request):
 
 
 def user_login(request):
-    messages.success(request, 'if u Redirected to login page, authenticate')
     if request.method == 'POST':
         form = forms.LoginForm(request, data=request.POST)
         if form.is_valid():
@@ -64,7 +63,7 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, f'Welcom, {username}!')
+                messages.success(request, f'Welcome, {username}!')
                 return redirect('/')
             else:
                 messages.error(request, 'Неверные данные')
