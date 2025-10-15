@@ -68,7 +68,7 @@ def registr(request):
         user_form = forms.RegForm(request.POST)
         if user_form.is_valid():
             user = user_form.save()
-            login(request, user)  # ← автоматический вход после регистрации
+            login(request, user)  #  автоматический вход после регистрации
             return redirect('/')
     else:
         user_form = forms.RegForm()
@@ -110,7 +110,7 @@ def post_detail(request, pk):
     comments = Comment.objects.filter(post=post).order_by('-created_at')
     
     if request.method == 'POST':
-        # Отправка нового комментария
+        # отправка нового комментария
         form = forms.CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
