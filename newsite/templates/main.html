@@ -6,21 +6,34 @@
             <div class="alert alert-{{ message.tags }}">{{ message }}</div>
         {% endfor %}
     {% endif %}
-##test:12test345
-<a href="\log" class="btn btn-info rounded-pill px-5">auth</a>
+
+<!-- <a href="\log" class="btn btn-info rounded-pill px-5">auth</a>
 <a href="\reg" class="btn btn-info rounded-pill px-5">reg</a>
-<a href="\logout" class="btn btn-info rounded-pill px-5">logout</a>
-<a href="\draw" class="btn btn-info rounded-pill px-5">Draw</a>
-<a href="\randphoto" class="btn btn-info rounded-pill px-5">Rand</a>
+<a href="\logout" class="btn btn-info rounded-pill px-5">logout</a> -->
+
+
+
+
+
+<div class=" mx-auto "> 
+    ##test:12test345
+
+    <a href="\draw" class="btn btn-info rounded-pill px-5">Draw</a>
+    <a href="\randphoto" class="btn btn-info rounded-pill px-5">Rand</a>
+    </div>
+<!-- <a href="\draw" class="btn btn-info rounded-pill px-5">Draw</a>
+<a href="\randphoto" class="btn btn-info rounded-pill px-5">Rand</a> -->
 
 
 
 <br>
 
 <!-- px-5 col-md-10 -->
+
+
 {% for data in articles_data %}
     {% with el=data.article %}
-    <div class="row border rounded-1 border-primary">
+    <div style="margin: auto;" class=" row-gap-3 row rounded-1 border border-info">
         <div class="col-6">
             <h1>{{ el.title }}</h1>
             <p>{{ el.text }}</p>
@@ -48,7 +61,6 @@
     {% endwith %}
 {% endfor %}
     <br>
-    <a href="\post" class="btn btn-info rounded-pill px-3">Posting</a>
 {% load static %}
 
 <script src="{% static 'js/postlike.js' %}"></script>
