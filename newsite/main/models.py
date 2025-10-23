@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Articles(models.Model):
     title = models.CharField('Name', max_length=100)
-    text = models.CharField('Text', max_length=100)
+    text = models.TextField('Text')
     date = models.DateTimeField('Date', auto_now_add=True)
     image = models.ImageField('Image', upload_to='articles_images/', null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)

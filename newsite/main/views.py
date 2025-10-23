@@ -31,7 +31,7 @@ def like_article(request, pk):
 
 
 def main(request):
-    elements = Articles.objects.all()
+    elements = Articles.objects.all().order_by('-date')
     
     # Подготавливаем данные о лайках
     articles_data = []
