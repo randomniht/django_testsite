@@ -34,6 +34,7 @@
 
     <a href="\draw" class="btn btn-info rounded-pill px-5">Draw</a>
     <a href="\randphoto" class="btn btn-info rounded-pill px-5">Rand</a>
+    <a href="\snake_game" class="btn btn-info rounded-pill px-5">Snake</a>
     </div>
 <!-- <a href="\draw" class="btn btn-info rounded-pill px-5">Draw</a>
 <a href="\randphoto" class="btn btn-info rounded-pill px-5">Rand</a> -->
@@ -47,7 +48,7 @@
 
 {% for data in articles_data %}
     {% with el=data.article %}
-    <div style="margin: auto;" class=" row-gap-3 row rounded-1 border border-info">
+    <div style="margin: auto; padding: 10px;" class=" row-gap-3 row rounded-1 border border-info">
         <div class="col-6">
             <h1>{{ el.title }}</h1>
             <p>{{ el.text }}</p>

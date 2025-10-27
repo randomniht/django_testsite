@@ -1,0 +1,11 @@
+{% extends 'inheritance.html'%}
+{% block title %}{%endblock%}
+{% block div %}
+<h1>Snakegame <br>
+##1111s3
+</h1>
+<canvas id="game" width="608" height="608"></canvas>
+<button id="restartBtn" class="like-btn btn btn-danger rounded-pill px-3">Заново</button>
+{% load static %}
+<script src="{% static 'js/snake.js' %}"></script>
+{%endblock%}
