@@ -1,0 +1,118 @@
+
+#modalImage {
+                transition: transform 0.1s ease; /* плавное изменение transform за 0.3 сек */
+                display: block; /* чтобы не было других неожиданных эффектов */
+                max-width: 100%; /* чтобы изображение не выходило за границы контейнера */
+                height: auto; /* сохранять пропорции */
+                /* cursor: zoom-in; джойсти для эффекта масштабирования (по желанию) */
+                }
+                .article-card {
+    border: 1px solid #edeff1 !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+.article-card {
+    border: 1px solid #ccc !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+}
+
+.article-title {
+    font-weight: 700;
+    color: #1c1c1c;
+}
+
+.article-text {
+    color: #1c1c1c;
+}
+
+.collapsed-image {
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+}
+
+.expanded-image {
+    max-height: none !important;
+}
+
+.expand-btn {
+    color: #0079d3;
+    border-color: #0079d3;
+    font-size: 0.9rem;
+    padding: 4px 12px;
+}
+
+.expand-btn:hover {
+    background-color: #0079d3;
+    color: white;
+}
+
+/* Reddit colors */
+body {
+    background-color: #dae0e6;
+}
+.collapsed-image {
+    max-height: 150px;
+    object-fit: cover;
+}
+.full-height-image {
+    max-height: auto;
+    object-fit: contain;
+}
+
+.dropdown-toggle:hover {
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4) !important;
+}
+
+.dropdown-item:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Исправляем позиционирование */
+.dropdown-menu[data-bs-popper] {
+    top: 100% !important;
+    left: 0 !important;
+    margin-top: 8px !important;
+}
+.card {
+    border-radius: 12px !important;
+}
+
+.btn-success {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4) !important;
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(220, 53, 69, 0.4) !important;
+}
+
+.shadow-sm {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+
+.form-control {
+    border-radius: 8px !important;
+    border: 2px solid #e9ecef !important;
+    padding: 12px !important;
+}
+
+.form-control:focus {
+    border-color: #007bff !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+}

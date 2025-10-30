@@ -28,14 +28,28 @@
 
 
 
-
-<div class=" mx-auto "> 
     ##test:12test345
 
-    <a href="\draw" class="btn btn-info rounded-pill px-5">Draw</a>
-    <a href="\randphoto" class="btn btn-info rounded-pill px-5">Rand</a>
-    <a href="\snake_game" class="btn btn-info rounded-pill px-5">Snake</a>
+<div class="d-flex justify-content-between align-items-center mx-auto py-3">
+    <a class="btn btn-success rounded-pill px-5 py-2 fs-5 fw-bold shadow" href="/post" 
+       style="font-size: 1.2rem !important; box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4) !important;">
+        📝 Add_post
+    </a>
+    
+    <div class="dropdown">
+        <button class="btn btn-info rounded-pill px-5 py-2 fs-5 fw-bold dropdown-toggle shadow" 
+                type="button" id="otherDropdown" data-bs-toggle="dropdown" aria-expanded="false"
+                style="font-size: 1.2rem !important; box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4) !important;">
+            🎮 Other
+        </button>
+        <ul class="dropdown-menu shadow-lg" aria-labelledby="otherDropdown"
+            style="border: none; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); margin-top: 8px !important;">
+            <li><a class="dropdown-item py-2 fs-6" href="\draw"><i class="bi bi-brush me-2"></i>Draw</a></li>
+            <li><a class="dropdown-item py-2 fs-6" href="\randphoto"><i class="bi bi-shuffle me-2"></i>Rand</a></li>
+            <li><a class="dropdown-item py-2 fs-6" href="\snake_game"><i class="bi bi-joystick me-2"></i>Snake</a></li>
+        </ul>
     </div>
+</div>
 <!-- <a href="\draw" class="btn btn-info rounded-pill px-5">Draw</a>
 <a href="\randphoto" class="btn btn-info rounded-pill px-5">Rand</a> -->
 
@@ -47,6 +61,73 @@
 
 
 {% for data in articles_data %}
+    {% with el=data.article %}
+    <div class="article-card mb-4 bg-white border rounded mx-auto" style="max-width: 1200px; width: 95%;">
+        <div class="article-content p-4">
+            <!-- Заголовок -->
+            <h1 class="article-title text-center mb-3" style="color: #1c1c1c; font-size: 1.8rem;">{{ el.title }}</h1>
+
+            <!-- Текст статьи -->
+            <p class="article-text text-center mb-3" style="color: #1c1c1c; font-size: 1.1rem; line-height: 1.6;">{{ el.text|truncatewords:100 }}</p>
+
+            <!-- Изображение с обработкой высоты -->
+            {% if el.image %}
+                <div class="text-center mb-3 position-relative">
+                    <img src="{{ el.image.url }}" alt="{{ el.title }}" class="article-image img-fluid rounded 
+                                {% if el.image.height > 300 %}collapsed-image{% else %}full-height-image{% endif %}"
+                        id="image-{{ el.pk }}">
+                    
+                    {% if el.image.height > 300 %}
+                        <div class="expand-section mt-2">
+                            <button class="btn btn-outline-primary btn-sm expand-btn" 
+                                    data-article-id="{{ el.pk }}"
+                                    data-expanded="false">
+                                Развернуть ▲
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            {% else %}
+                <p class="text-center text-muted mb-3">!No img</p>
+            {% endif %}
+
+            <!-- Мета-информация -->
+            <div class="article-meta text-center text-muted mb-3" style="font-size: 0.9rem;">
+                <p class="mb-1">{{ el.date }}</p>
+                <p class="mb-1" style="color: #0079d3; font-weight: 500;">{{ el.author }}</p>
+            </div>
+
+            <!-- Кнопка лайка и счетчик -->
+            <div class="text-center">
+                <button class="like-btn btn {% if data.user_has_liked %}btn-danger{% else %}btn-success{% endif %} rounded-pill px-4 py-2 mb-2" 
+                        data-article-id="{{ el.pk }}"
+                        style="font-weight: 600; font-size: 1rem;">
+                    {% if data.user_has_liked %}Like{% else %}Like{% endif %}
+                </button>
+                <div style=" font-size: 1rem; margin-bottom: 10px;">
+                    Лайков: <span id="like-count-{{ el.pk }}">{{ el.likes_count }}</span>
+                </div>
+                <a href="{% url 'post_detail' pk=el.pk %}" class="btn btn-primary px-4 py-2" style="background-color: #0079d3; border-color: #0079d3;">
+                    Check
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endwith %}
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- {% for data in articles_data %}
     {% with el=data.article %}
     <div style="margin: auto; padding: 10px;" class=" row-gap-3 row rounded-1 border border-info">
         <div class="col-6">
@@ -74,11 +155,14 @@
     </div>
     <br>
     {% endwith %}
-{% endfor %}
+{% endfor %} -->
     <br>
 {% load static %}
 <script src="{% static 'js/modalwind.js' %}"></script>
 <script src="{% static 'js/postlike.js' %}"></script>
+
+<script src="{% static 'js/imagexpand.js' %}"></script>
+<!-- expend тратить а expand расширить -->
 
 
 {%endblock%}
