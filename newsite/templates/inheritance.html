@@ -10,7 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/animejs/dist/bundles/anime.umd.min.js"></script>
         <link rel="stylesheet" href="/static/css/inheritance.css">
+
     
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
@@ -20,8 +22,9 @@
     <header>
     <div class="container-fluid">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark py-2">
-            <div class="container-fluid">
-                <a class="navbar-brand fw-bold fs-3" href="/">MySite</a>
+            <div class="container-fluid large grid centered square-grid">
+                <a class="navbar-brand fw-bold fs-3 text-xl" href="/">MySite</a>
+</div>
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" 
                         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,8 +57,12 @@
     <img src="/media/template/gif/pizzalien.gif" height="auto" width="100%" style="z-index: 4;">
     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8"/>
-</svg> <h1 style="margin-left: 10px;"> Здарова</h1></div>
+</svg> <h1 style="margin-left: 10px;"> Здарова</h1>
 
+</div>
+ <canvas id="cubeCanvas" width="100" height="100"></canvas>
+ <canvas id="mycanvas0" width="250" height="250"></canvas>
+<div>
 <marquee
   direction="down"
   width="900"
@@ -63,6 +70,11 @@
   behavior="alternate"
   style="border:solid; border-color: rgb(14, 179, 179); background-color: rgb(90, 252, 252);">
   <marquee behavior="alternate"><img alt="angel fish" src="/media/template/img/angel.png"></marquee>
+  </div>
+{% load static %}
+<script src="{% static 'js/cube.js' %}"></script>
+<script src="{% static 'js/cubeothr.js' %}"></script>
+
 </body>
 
 </html>

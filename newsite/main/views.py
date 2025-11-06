@@ -176,6 +176,7 @@ def snake_game(request):
     return render(request, 'snake.html')
 
 
+
 # def registr(request):
 #     if request.method == 'POST':
 #         user_form = forms.RegForm(request.POST)

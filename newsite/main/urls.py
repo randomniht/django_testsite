@@ -12,5 +12,5 @@ urlpatterns = [
     path('draw/', draw_page),
     path('randphoto/',randmed),
     path('articles/<int:pk>/like/', like_article, name='like_post'),
-    path('snake_game/', snake_game)
+    path('snake_game/', snake_game),
 ]
