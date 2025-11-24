@@ -178,20 +178,25 @@ def snake_game(request):
 
 @login_required(login_url='/log/')
 def words(request):
+    status = request.GET.get('status')
+
+    if status == 'learned':
+        all_words = Word.objects.filter(is_done=True)
+    else:
+        all_words = Word.objects.all()
+    
     if request.method == 'POST':
         text = request.POST.get('text').strip()
         translate = request.POST.get('translate').strip()
 
-        # Проверка, существует ли слово
         if Word.objects.filter(text__iexact=text).exists():
             messages.error(request, 'word_exist')
         else:
             Word.objects.create(text=text, translate=translate, created_by=request.user)
 
         return redirect('words')
-
-    all_words = Word.objects.filter(is_done=False)
-    return render(request, 'word_main.html', {'words': all_words})
+    
+    return render(request, 'word_main.html', {'words': all_words, 'status': status})
 
 @login_required(login_url='/log/')
 def words_detail(request, word_id):
