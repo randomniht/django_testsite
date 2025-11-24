@@ -28,3 +28,8 @@ class PostMedia(forms.ModelForm):
     class Meta:
         model = models.Mediapost
         fields = ['image']
+        
+class WordForm(forms.ModelForm):
+    class Meta:
+        model = models.Word
+        fields = ['text', 'translate']

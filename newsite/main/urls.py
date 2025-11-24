@@ -13,4 +13,7 @@ urlpatterns = [
     path('randphoto/',randmed),
     path('articles/<int:pk>/like/', like_article, name='like_post'),
     path('snake_game/', snake_game),
+    path('words/', words,name='words'),
+    path('words/<int:word_id>/', words_detail, name='words_detail'),
+    path('words/<int:word_id>/delete/', word_delete, name='word_delete')
 ]

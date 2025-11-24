@@ -127,7 +127,6 @@ function drawGame() {
 // Старт игры
 function startGame() {
     console.log("Game started");
-    game = setInterval(drawGame, 100); // запуск таймера
 }
 
 // Получаем кнопку по ID

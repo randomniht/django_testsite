@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Articles, Comment, Mediapost
+from .models import Articles, Comment, Mediapost, Word, Note
 from . import forms
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
-
+from django.utils import timezone
 # Create your views here.
 
 
@@ -174,6 +174,68 @@ def randmed(request):
 
 def snake_game(request):
     return render(request, 'snake.html')
+
+
+@login_required(login_url='/log/')
+def words(request):
+    if request.method == 'POST':
+        text = request.POST.get('text').strip()
+        translate = request.POST.get('translate').strip()
+
+        # Проверка, существует ли слово
+        if Word.objects.filter(text__iexact=text).exists():
+            messages.error(request, 'word_exist')
+        else:
+            Word.objects.create(text=text, translate=translate, created_by=request.user)
+
+        return redirect('words')
+
+    all_words = Word.objects.filter(is_done=False)
+    return render(request, 'word_main.html', {'words': all_words})
+
+@login_required(login_url='/log/')
+def words_detail(request, word_id):
+    word = get_object_or_404(Word, pk=word_id)
+
+    if request.method == 'POST' and 'note' in request.POST:
+        note_text = request.POST.get('note')
+        if note_text:
+            Note.objects.create(word=word, text=note_text, created_at=timezone.now())
+        return redirect('words_detail', word_id=word_id)
+
+    if request.method == 'POST' and 'mark_done' in request.POST:
+        word.is_done = True
+        word.save()
+        return redirect('words_detail', word_id=word_id)
+
+    notes = word.notes.all()
+
+    context = {
+        'word': word,
+        'notes': notes,
+    }
+    return render(request, 'word_detail.html', context)
+
+
+@login_required(login_url='/log/')
+def word_delete(request, word_id):
+    word = get_object_or_404(Word, pk=word_id)
+    if request.method == 'POST':
+        word.delete()
+        return redirect('words')
+    return render(request, {'word': word})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

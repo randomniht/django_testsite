@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Изучение слов</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #f6f7f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 700px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .menu a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #0077cc;
+            font-weight: 500;
+        }
+        input {
+            padding: 10px;
+            width: 45%;
+            margin-right: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: #0077cc;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #005fa3;
+        }
+        .word-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+        .word-item a {
+            text-decoration: none;
+            color: #333;
+        }
+        .learned {
+            color: #999;
+        }
+        form input {
+            margin-bottom: 10px;
+            margin-top: 10px;
+            display: block;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+        .note {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+        .button-form {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Словарь для изучения</h1>
+        <div class="card menu">
+            <a href="/words">Главная</a>
+            <a href="?status=learned">Изученные</a>
+        </div>
+        <!-- Форма добавления слова -->
+        <div class="card">
+            <form id="addWordForm" method="post" action="{% url 'words' %}">
+                {% csrf_token %}
+                <div>
+                    <label for="id_text">текст:</label>
+                    <input type="text" name="text" placeholder="Слово" maxlength="100" required id="id_text" />
+                </div>
+                <div>
+                    <label for="id_translate">перевод:</label>
+                    <input type="text" name="translate" placeholder="Перевод" maxlength="100" required id="id_translate" />
+                </div>
+                <button type="submit">Добавить слово</button>
+            </form>
+        </div>
+        <!-- Список слов -->
+        <div class="card" id="wordList">
+            {% if words %}
+                {% for word in words %}
+                <div class="word-item">
+                    <span>
+                        <a href="/words/{{ word.id }}/">
+                            <strong>{{ word.text }}</strong> &mdash; {{ word.translate }}
+                        </a>
+                    </span>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>Нет слов для отображения.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
