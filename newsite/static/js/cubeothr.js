@@ -89,7 +89,7 @@ function drawCuboid() {
   ctx.save();
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.strokeStyle = "#fff";
+  ctx.strokeStyle = "#ff0000ff";
   ctx.beginPath();
   edges.forEach(function(edge) {
     let p1 = nodes[edge[0]];
